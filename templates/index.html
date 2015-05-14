@@ -4,14 +4,16 @@
 	<title>comicD3</title>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script src="{{ url_for('static', filename='starvis.js') }}"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
-<body>
+<body onload="drawLinechart('{{ thumbnails[0]['title'] }}', {{ thumbnails[0]['stars'] }});">
+	<div id='linechart'></div>
 	<div class='wrapper'>
 		{% for thumbnail in thumbnails %}
 			<div id="{{ thumbnail['id'] }}" class=''>
 				<a href="http://comic.naver.com{{ thumbnail['href'] }}">{{ thumbnail['title'] }}</a>
-				<input class="visbutton" type="button" value="visualize" onclick="drawLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }});" />
+				<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }});" />
 			</div>
 		{% endfor %}
 	</div>
