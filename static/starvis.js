@@ -8,7 +8,7 @@ function drawLinechart(title, stars){
 
 	stars = temp;
 
-	var	margin = {top: 30, right: 20, bottom: 30, left: 50},
+	var	margin = {top: 30, right: 100, bottom: 30, left: 50},
 		width = 1000 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
@@ -171,7 +171,7 @@ function updateLinechart(title, stars){
 
 	stars = temp;
 
-	var	margin = {top: 30, right: 20, bottom: 30, left: 50},
+	var	margin = {top: 30, right: 100, bottom: 30, left: 50},
 		width = 1000 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
