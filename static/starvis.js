@@ -36,6 +36,15 @@ function drawLinechart(title, stars){
 
 	var bisectEpisode = d3.bisector(function(d) { return d.x; }).left;
 
+	svg.append("text")
+		.attr('id', 'linetitle')
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text(title);
+
 	x.domain(d3.extent(stars, function(d){ return d.x; }));
 	y.domain(d3.extent(stars, function(d){ return d.y; }));
 
@@ -189,6 +198,9 @@ function updateLinechart(title, stars){
 	var svg = d3.select('#linechart').transition();
 
 	var bisectEpisode = d3.bisector(function(d) { return d.x; }).left;
+
+	d3.select('#linetitle')
+		.text(title);
 
 	x.domain(d3.extent(stars, function(d){ return d.x; }));
 	y.domain(d3.extent(stars, function(d){ return d.y; }));
