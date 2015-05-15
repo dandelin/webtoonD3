@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
-<body onload="drawLinechart('{{ thumbnails[0]['title'] }}', {{ thumbnails[0]['stars'] }}, {{ thumbnails[0]['id'] }});">
+<body onload="drawLinechart('{{ start['title'] }}', {{ start['stars'] }}, {{ start['id'] }});">
 	<h1 id='linetitle'></h1>
 	<div id='linechart'></div>
 	<div class='wrapper'>

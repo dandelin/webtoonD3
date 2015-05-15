@@ -1,5 +1,7 @@
 function drawLinechart(title, stars, id){
 
+	window.scrollTo(0, 0);
+
 	temp = [];
 
 	for(var i = 1; i < stars.length + 1; i++){
@@ -169,6 +171,8 @@ function drawLinechart(title, stars, id){
 }
 
 function updateLinechart(title, stars, id){
+
+	window.scrollTo(0, 0);
 
 	temp = [];
 
