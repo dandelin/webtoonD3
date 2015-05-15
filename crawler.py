@@ -28,7 +28,7 @@ def makeStarList(href):
 	with open('static/thumbnails.json', 'rb') as fp:
 		thumbnails = json.load(fp)
 	pages = [naverComicUrl + href + '&page=' + str(num) for num in xrange(1, endPageNum(href) + 1)]
-	stars = [[float(star.string) for star in [x.find_all('strong')[0] for x in bs(urllib.urlopen(page).read()).find_all('div', 'rating_type')]][::-1] for page in pages][::-1]
+	stars = [[float(star.string) for star in [x.find_all('strong')[0] for x in bs(urllib.urlopen(page).read()).find_all('div', 'rating_type')]] for page in pages][::-1]
 	return flatten(stars)
 
 
