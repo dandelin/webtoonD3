@@ -1,4 +1,4 @@
-function drawLinechart(title, stars){
+function drawLinechart(title, stars, id){
 
 	temp = [];
 
@@ -107,10 +107,15 @@ function drawLinechart(title, stars){
         .style("pointer-events", "all")
         .on("mouseover", function() { focus.style("display", null); })
         .on("mouseout", function() { focus.style("display", "none"); })
-        .on("mousemove", mousemove);
+        .on("mousemove", function() { mousemove(this, id); });
 
-    function mousemove() {
-		var x0 = x.invert(d3.mouse(this)[0]),
+    function popupEpisode(id, episode) {
+    	var url = "http://comic.naver.com/webtoon/detail.nhn?titleId=" + id + '&no=' + episode;
+    	window.open(url);
+    }
+
+    function mousemove(rect, id) {
+		var x0 = x.invert(d3.mouse(rect)[0]),
 		    i = bisectEpisode(stars, x0, 1),
 		    d0 = stars[i - 1],
 		    d1 = stars[i],
@@ -156,11 +161,14 @@ function drawLinechart(title, stars){
 		          "translate(" + width * -1 + "," +
 		                         y(d.y) + ")")
 		               .attr("x2", width + width);
+
+		d3.select("rect")
+			.on('click', function() { popupEpisode(id, d.x); })
 	}
 
 }
 
-function updateLinechart(title, stars){
+function updateLinechart(title, stars, id){
 
 	temp = [];
 
@@ -207,10 +215,15 @@ function updateLinechart(title, stars){
 		.duration(750)
 		.call(yAxis);
 
-	d3.select('rect').on("mousemove", mousemove);
+	d3.select('rect').on("mousemove", function() { mousemove(this, id); });
 
-    function mousemove() {
-		var x0 = x.invert(d3.mouse(this)[0]),
+    function popupEpisode(id, episode) {
+    	var url = "http://comic.naver.com/webtoon/detail.nhn?titleId=" + id + '&no=' + episode;
+    	window.open(url);
+    }
+
+    function mousemove(rect, id) {
+		var x0 = x.invert(d3.mouse(rect)[0]),
 		    i = bisectEpisode(stars, x0, 1),
 		    d0 = stars[i - 1],
 		    d1 = stars[i],
@@ -256,5 +269,8 @@ function updateLinechart(title, stars){
 		          "translate(" + width * -1 + "," +
 		                         y(d.y) + ")")
 		               .attr("x2", width + width);
+
+		d3.select("rect")
+			.on('click', function() { popupEpisode(id, d.x); })
 	}
 }
