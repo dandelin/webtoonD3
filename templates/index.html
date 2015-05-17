@@ -2,16 +2,16 @@
 
 <head>
 	<title>comicD3</title>
+
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="{{ url_for('static', filename='starvis.js') }}"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<script language="javascript" type="text/javascript">
 	    function filter(element) {
 	        var value = $(element).val();
 
-	        $(".thumbnails > li").each(function() {
+	        $("#thumbnails > li").each(function() {
 	            if ($(this).children("a:first").text().search(value) > -1) {
 	                $(this).show();
 	            }
@@ -24,15 +24,18 @@
 </head>
 
 <body onload="drawLinechart('{{ start['title'] }}', {{ start['stars'] }}, {{ start['id'] }});">
-	<h1 id='linetitle'></h1>
-	<div id='linechart'></div>
-	<ul class='thumbnails'>
-		<input type="text" onkeyup="filter(this)" />
-		{% for thumbnail in thumbnails %}
-			<li id="{{ thumbnail['id'] }}" class=''>
-				<a href="http://comic.naver.com{{ thumbnail['href'] }}">{{ thumbnail['title'] }}</a>
-				<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }});" />
-			</li>
-		{% endfor %}
-	</ul>
+	<div id='vis'>
+		<h1 id='linetitle'></h1>
+		<div id='linechart'></div>
+		<ul id='thumbnails'>
+			<input type="text" placeholder='Enter title' id='filterbox' onkeyup="filter(this)" />
+			<p></p>
+			{% for thumbnail in thumbnails %}
+				<li id="{{ thumbnail['id'] }}" class=''>
+					<a href="http://comic.naver.com{{ thumbnail['href'] }}">{{ thumbnail['title'] }}</a>
+					<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }});" />
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 </body>
