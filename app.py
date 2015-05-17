@@ -10,7 +10,8 @@ app = Flask(__name__)
 def index():
 	with open('static/thumbnails.json', 'rb') as fp:
 		thumbnails = json.load(fp)
-	return render_template('index.html', thumbnails=thumbnails, start=random.choice(thumbnails))
+	titles = [thumbnail['title'] for thumbnail in thumbnails]
+	return render_template('index.html', thumbnails=thumbnails, start=random.choice(thumbnails), titles = titles)
 
 
 if __name__ == '__main__':
