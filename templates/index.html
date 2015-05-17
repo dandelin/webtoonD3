@@ -8,18 +8,7 @@
 	<script src="{{ url_for('static', filename='starvis.js') }}"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 	<script language="javascript" type="text/javascript">
-	    function filter(element) {
-	        var value = $(element).val();
-
-	        $("#thumbnails > li").each(function() {
-	            if ($(this).children("a:first").text().search(value) > -1) {
-	                $(this).show();
-	            }
-	            else {
-	                $(this).hide();
-	            }
-	        });
-	    }
+	    
 	</script>
 </head>
 
@@ -28,11 +17,14 @@
 		<h1 id='linetitle'></h1>
 		<div id='linechart'></div>
 		<ul id='thumbnails'>
-			<input type="text" placeholder='Enter title' id='filterbox' onkeyup="filter(this)" />
+			<input type="text" placeholder='Enter title' id='titlebox' onkeyup="titlefilter(this)" />
+			<input type="text" placeholder='Enter author' id='authorbox' onkeyup="authorfilter(this)" />
 			<p></p>
 			{% for thumbnail in thumbnails %}
 				<li id="{{ thumbnail['id'] }}" class=''>
 					<a href="http://comic.naver.com{{ thumbnail['href'] }}">{{ thumbnail['title'] }}</a>
+					<a> by </a>
+					<span>{{ thumbnail['author'] }}</span>
 					<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }});" />
 				</li>
 			{% endfor %}

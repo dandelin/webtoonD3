@@ -1,3 +1,29 @@
+function titlefilter(element) {
+    var value = $(element).val();
+
+    $("#thumbnails > li").each(function() {
+        if ($(this).children("a:first").text().search(value) > -1) {
+            $(this).show();
+        }
+        else {
+            $(this).hide();
+        }
+    });
+}
+
+function authorfilter(element) {
+    var value = $(element).val();
+
+    $("#thumbnails > li").each(function() {
+        if ($(this).children("span:first").text().search(value) > -1) {
+            $(this).show();
+        }
+        else {
+            $(this).hide();
+        }
+    });
+}
+
 function drawLinechart(title, stars, id){
 
 	window.scrollTo(0, 0);
