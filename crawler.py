@@ -27,8 +27,8 @@ def endPageNum(href):
 
 def makeStarList(href):
 	pages = [naverComicUrl + href + '&page=' + str(num) for num in xrange(1, endPageNum(href) + 1)]
-	stars = [[float(star.string) for star in [x.find_all('strong')[0] for x in bs(urllib.urlopen(page).read()).find_all('div', 'rating_type')]] for page in pages][::-1]
-	return flatten(stars)
+	stars = [[float(star.string) for star in [x.find_all('strong')[0] for x in bs(urllib.urlopen(page).read()).find_all('div', 'rating_type')]] for page in pages]
+	return flatten(stars)[::-1]
 
 def getAuthor(href):
 	return bs(urllib.urlopen(naverComicUrl + href).read()).find_all('span', 'wrt_nm')[0].string
