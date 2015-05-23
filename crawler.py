@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from lxml import html
-import requests, json, re, itertools
+import requests, json, re, itertools, sys
 
 naverComicUrl = 'http://comic.naver.com'
 naverComicListUrl = naverComicUrl + '/webtoon/creation.nhn?view=image'
@@ -46,22 +46,26 @@ def missing_pages(tn):
 	print tn['title'].encode('utf-8'), mpgs
 	return mpgs
 
-def validation():
+def validation(start):
 	with open('static/thumbnails.json', 'r') as fp:
 		thumbnails = json.load(fp)
-	withMissing = [{
-		'author' : t['author'],
-		'title' : t['title'],
-		'href' : t['href'],
-		'stars' : t['stars'],
-		'imgsrc' : t['imgsrc'],
-		'id' : t['id'],
-		'missing' : [str(pn) for pn in missing_pages(t)]
-	} for t in thumbnails]
-	with open('static/thumbnails.json', 'w') as fp:
-		fp.write(withMissing)
+	for i in xrange(int(start), len(thumbnails)):
+		t = thumbnails[i]
+		thumbnail = {
+			'author' : t['author'],
+			'title' : t['title'],
+			'href' : t['href'],
+			'stars' : t['stars'],
+			'imgsrc' : t['imgsrc'],
+			'id' : t['id'],
+			'missing' : [str(pn) for pn in missing_pages(t)]
+		}
+		thumbnails[i] = thumbnail
+		with open('static/thumbnails.json', 'w') as fp:
+			fp.write(thumbnails)
+		print i, 'complete!'
 
 
 if __name__ == '__main__':
 	#init_thumbnails()
-	validation()
+	validation(sys.argv[1])
