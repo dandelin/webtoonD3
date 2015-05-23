@@ -39,6 +39,29 @@ def getAuthor(href):
 	author = html.fromstring(requests.get(naverComicUrl + href).text).xpath("//span[@class='wrt_nm']")[0].text
 	return author
 
+def missing_pages(tn):
+	pages = [naverComicUrl + '/webtoon/detail.nhn?titleId=' + tn['id'] + '&no=' + str(num) for num in xrange(1, len(tn['stars']) + 1)]
+	main_title = html.fromstring(requests.get('http://comic.naver.com/main.nhn').text).xpath('//head/title')[0].text
+	mpgs = [i+1 for i, page in enumerate(pages) if html.fromstring(requests.get(page).text).xpath('//head/title')[0].text == main_title]
+	print tn['title'].encode('utf-8'), mpgs
+	return mpgs
+
+def validation():
+	with open('static/thumbnails.json', 'r') as fp:
+		thumbnails = json.load(fp)
+	withMissing = [{
+		'author' : t['author'],
+		'title' : t['title'],
+		'href' : t['href'],
+		'stars' : t['stars'],
+		'imgsrc' : t['imgsrc'],
+		'id' : t['id'],
+		'missing' : [str(pn) for pn in missing_pages(t)]
+	} for t in thumbnails]
+	with open('static/thumbnails.json', 'w') as fp:
+		fp.write(withMissing)
+
 
 if __name__ == '__main__':
-	init_thumbnails()
+	#init_thumbnails()
+	validation()
