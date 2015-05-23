@@ -62,7 +62,7 @@ def validation(start):
 		}
 		thumbnails[i] = thumbnail
 		with open('static/thumbnails.json', 'w') as fp:
-			fp.write(thumbnails)
+			json.dump(thumbnails, fp)
 		print i, 'complete!'
 
 
