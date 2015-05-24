@@ -24,9 +24,20 @@ function authorfilter(element) {
     });
 }
 
+function ChangeUrl(title, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: title, Url: url };
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        console.log("Browser does not support HTML5.");
+    }
+}
+
 function drawLinechart(title, stars, id, missing){
 
 	window.scrollTo(0, 0);
+
+	ChangeUrl(title, id);
 
 	temp = [];
 
@@ -204,6 +215,8 @@ function drawLinechart(title, stars, id, missing){
 function updateLinechart(title, stars, id, missing){
 
 	window.scrollTo(0, 0);
+
+	ChangeUrl(title, id);
 
 	temp = [];
 

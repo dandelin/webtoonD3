@@ -25,7 +25,7 @@
 					<a href="http://comic.naver.com{{ thumbnail['href'] }}">{{ thumbnail['title'] }}</a>
 					<a> by </a>
 					<span>{{ thumbnail['author'] }}</span>
-					<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }}, {{ thumbnail['missing'] }});" />
+					<input href="#{{ thumbnail['id']}}" class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }}, {{ thumbnail['missing'] }});" />
 				</li>
 			{% endfor %}
 		</ul>
