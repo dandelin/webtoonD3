@@ -58,14 +58,13 @@ def validation(start):
 			'stars' : t['stars'],
 			'imgsrc' : t['imgsrc'],
 			'id' : t['id'],
-			'missing' : [str(pn) for pn in missing_pages(t)]
+			'missing' : missing_pages(t)
 		}
 		thumbnails[i] = thumbnail
 		with open('static/thumbnails.json', 'w') as fp:
 			json.dump(thumbnails, fp)
 		print i, 'complete!'
 
-
 if __name__ == '__main__':
-	#init_thumbnails()
-	validation(sys.argv[1])
+	init_thumbnails()
+	#validation(sys.argv[1])

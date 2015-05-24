@@ -12,7 +12,7 @@
 	</script>
 </head>
 
-<body onload="drawLinechart('{{ start['title'] }}', {{ start['stars'] }}, {{ start['id'] }});">
+<body onload="drawLinechart('{{ start['title'] }}', {{ start['stars'] }}, {{ start['id'] }}, {{ start['missing'] }});">
 	<div id='vis'>
 		<h1 id='linetitle'></h1>
 		<div id='linechart'></div>
@@ -25,7 +25,7 @@
 					<a href="http://comic.naver.com{{ thumbnail['href'] }}">{{ thumbnail['title'] }}</a>
 					<a> by </a>
 					<span>{{ thumbnail['author'] }}</span>
-					<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }});" />
+					<input class="visbutton" type="button" value="visualize" onclick="updateLinechart('{{ thumbnail['title'] }}', {{ thumbnail['stars'] }}, {{ thumbnail['id'] }}, {{ thumbnail['missing'] }});" />
 				</li>
 			{% endfor %}
 		</ul>

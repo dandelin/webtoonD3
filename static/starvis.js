@@ -24,7 +24,7 @@ function authorfilter(element) {
     });
 }
 
-function drawLinechart(title, stars, id){
+function drawLinechart(title, stars, id, missing){
 
 	window.scrollTo(0, 0);
 
@@ -138,7 +138,12 @@ function drawLinechart(title, stars, id){
         .on("mousemove", function() { mousemove(this, id); });
 
     function popupEpisode(id, episode) {
-    	var url = "http://comic.naver.com/webtoon/detail.nhn?titleId=" + id + '&no=' + episode;
+    	var how_many = 0
+    	for(var i = 0; i < missing.length; i++){
+    		if(missing[i] <= episode)
+    			how_many++
+    	}
+    	var url = "http://comic.naver.com/webtoon/detail.nhn?titleId=" + id + '&no=' + (episode + how_many);
     	window.open(url);
     }
 
@@ -196,7 +201,7 @@ function drawLinechart(title, stars, id){
 
 }
 
-function updateLinechart(title, stars, id){
+function updateLinechart(title, stars, id, missing){
 
 	window.scrollTo(0, 0);
 
@@ -248,7 +253,12 @@ function updateLinechart(title, stars, id){
 	d3.select('rect').on("mousemove", function() { mousemove(this, id); });
 
     function popupEpisode(id, episode) {
-    	var url = "http://comic.naver.com/webtoon/detail.nhn?titleId=" + id + '&no=' + episode;
+    	var how_many = 0
+    	for(var i = 0; i < missing.length; i++){
+    		if(missing[i] <= episode)
+    			how_many++
+    	}
+    	var url = "http://comic.naver.com/webtoon/detail.nhn?titleId=" + id + '&no=' + (episode + how_many);
     	window.open(url);
     }
 
